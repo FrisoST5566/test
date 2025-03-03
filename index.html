@@ -30,28 +30,7 @@
             width: 100%;
             border: 2px solid #ff69b4;
             border-radius: 10px;
-        }
-        input[type="datetime-local"] {
-            background-color: white;
-            color: #ff69b4;
-            font-size: 16px;
             text-align: center;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            position: relative;
-            z-index: 1;
-        }
-        input[type="datetime-local"]::-webkit-datetime-edit-ampm-field,
-        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-            display: none;
-        }
-        input[type="datetime-local"]::-webkit-datetime-edit-hour-field,
-        input[type="datetime-local"]::-webkit-datetime-edit-minute-field {
-            text-align: center;
-        }
-        input[type="datetime-local"] {
-            max-width: 100%;
         }
         button {
             background-color: #ff69b4;
@@ -68,12 +47,17 @@
 <body>
     <div class="container">
         <h2>✨ 可愛少女風打卡計算器 ✨</h2>
-        <p>🌸 小仙女們，來輸入你的打卡時間吧！記得是 24 小時制唷！ 🌸</p>
+        <p>🌸 小仙女們，來輸入你的打卡時間吧！🌸</p>
         
-        <label for="startDateTime">🕘 上班打卡時間：</label>
-        <input type="datetime-local" id="startDateTime" step="1" required>
+        <label>📅 上班日期：</label>
+        <input type="text" id="month" placeholder="月" style="width: 30%">/
+        <input type="text" id="day" placeholder="日" style="width: 30%">
         
-        <label for="endDateTime">🕕 下班打卡時間：</label>
+        <label>⏰ 上班時間：</label>
+        <input type="text" id="hour" placeholder="時" style="width: 30%">:
+        <input type="text" id="minute" placeholder="分" style="width: 30%">
+        
+        <label>🕕 下班打卡時間：</label>
         <input type="text" id="endDateTime" disabled>
         
         <button id="calculateButton">💖 計算工時 💖</button>
@@ -83,19 +67,29 @@
 
     <script>
         document.getElementById("calculateButton").addEventListener("click", function() {
-            let startInput = document.getElementById("startDateTime");
+            let month = document.getElementById("month").value;
+            let day = document.getElementById("day").value;
+            let hour = document.getElementById("hour").value;
+            let minute = document.getElementById("minute").value;
             let endDateTimeInput = document.getElementById("endDateTime");
             let resultText = document.getElementById("result");
             
-            if (!startInput.value) {
-                resultText.innerText = "⚠️ 請輸入上班打卡時間，寶貝！💗";
+            if (!month || !day || !hour || !minute) {
+                resultText.innerText = "⚠️ 請完整輸入上班時間！💗";
                 return;
             }
             
-            let startTime = new Date(startInput.value);
+            let currentYear = new Date().getFullYear();
+            let startTime = new Date(`${currentYear}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}:00`);
+            
+            if (isNaN(startTime.getTime())) {
+                resultText.innerText = "⚠️ 輸入格式有誤，請檢查月份、日期、時間！💗";
+                return;
+            }
+            
             let endTime = new Date(startTime.getTime() + 7 * 60 * 60 * 1000); // 加 7 小時
             
-            let formattedDate = `${endTime.getFullYear()}-${(endTime.getMonth() + 1).toString().padStart(2, '0')}-${endTime.getDate().toString().padStart(2, '0')} ${endTime.getHours().toString().padStart(2, '0')}:${endTime.getMinutes().toString().padStart(2, '0')}`;
+            let formattedDate = `${endTime.getMonth() + 1}/${endTime.getDate()} ${endTime.getHours().toString().padStart(2, '0')}:${endTime.getMinutes().toString().padStart(2, '0')}`;
             endDateTimeInput.value = formattedDate;
             
             resultText.innerHTML = `💖 你的下班時間是: <strong>${formattedDate}</strong> 💖<br>💖 你今天的總工時是: <strong>7 小時</strong> 💖`;
