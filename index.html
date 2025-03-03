@@ -66,21 +66,22 @@
 
     <script>
         function calculateWorkHours() {
-            let start = document.getElementById("startDateTime").value;
+            let startInput = document.getElementById("startDateTime");
+            let endDateTimeInput = document.getElementById("endDateTime");
+            let resultText = document.getElementById("result");
             
-            if (!start) {
-                document.getElementById("result").innerText = "⚠️ 請輸入上班打卡時間，寶貝！💗";
+            if (!startInput.value) {
+                resultText.innerText = "⚠️ 請輸入上班打卡時間，寶貝！💗";
                 return;
             }
             
-            let startTime = new Date(start);
+            let startTime = new Date(startInput.value);
             let endTime = new Date(startTime.getTime() + 7 * 60 * 60 * 1000); // 加 7 小時
             
-            let endDateTimeInput = document.getElementById("endDateTime");
-            endDateTimeInput.value = endTime.toISOString().slice(0, 16); // 設定輸入框的值
+            let endTimeFormatted = endTime.toISOString().slice(0, 16).replace('T', ' ');
+            endDateTimeInput.value = endTime.toISOString().slice(0, 16);
             
-            let workHours = 7;
-            document.getElementById("result").innerText = "💖 你今天的總工時是: " + workHours.toFixed(2) + " 小時 💖";
+            resultText.innerText = `💖 你的下班時間是: ${endTimeFormatted} 💖\n💖 你今天的總工時是: 7 小時 💖`;
         }
     </script>
 </body>
