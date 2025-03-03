@@ -31,6 +31,9 @@
             border: 2px solid #ff69b4;
             border-radius: 10px;
         }
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
         input[type="datetime-local"]::-webkit-datetime-edit-ampm-field {
             display: none;
         }
@@ -47,14 +50,14 @@
 </head>
 <body>
     <div class="container">
-        <h2>✨ 小少女的打卡計算器 ✨</h2>
-        <p>🌸 小仙女，來輸入你的打卡時間吧！記得是 24 小時制唷！ 🌸</p>
+        <h2>✨ 可愛少女風打卡計算器 ✨</h2>
+        <p>🌸 小仙女們，來輸入你的打卡時間吧！記得是 24 小時制唷！ 🌸</p>
         
         <label for="startDateTime">🕘 上班打卡時間：</label>
         <input type="datetime-local" id="startDateTime" required>
         
         <label for="endDateTime">🕕 下班打卡時間：</label>
-        <input type="datetime-local" id="endDateTime" required>
+        <input type="datetime-local" id="endDateTime" disabled>
         
         <button onclick="calculateWorkHours()">💖 計算工時 💖</button>
         
@@ -64,21 +67,19 @@
     <script>
         function calculateWorkHours() {
             let start = document.getElementById("startDateTime").value;
-            let end = document.getElementById("endDateTime").value;
             
-            if (!start || !end) {
-                document.getElementById("result").innerText = "⚠️ 請輸入完整的打卡時間，寶貝！💗";
+            if (!start) {
+                document.getElementById("result").innerText = "⚠️ 請輸入上班打卡時間，寶貝！💗";
                 return;
             }
             
             let startTime = new Date(start);
-            let endTime = new Date(end);
+            let endTime = new Date(startTime.getTime() + 7 * 60 * 60 * 1000); // 加 7 小時
             
-            if (endTime < startTime) {
-                endTime.setDate(endTime.getDate() + 1);
-            }
+            let endDateTimeInput = document.getElementById("endDateTime");
+            endDateTimeInput.value = endTime.toISOString().slice(0, 16); // 設定輸入框的值
             
-            let workHours = (endTime - startTime) / (1000 * 60 * 60);
+            let workHours = 7;
             document.getElementById("result").innerText = "💖 你今天的總工時是: " + workHours.toFixed(2) + " 小時 💖";
         }
     </script>
