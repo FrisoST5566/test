@@ -50,8 +50,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>✨ 可愛少女風打卡計算器 ✨</h2>
-        <p>🌸 小仙女們，來輸入你的打卡時間吧！記得是 24 小時制唷！ 🌸</p>
+        <h2>✨ 小少女風打卡計算器 ✨</h2>
+        <p>🌸 小仙女，來輸入你的打卡時間吧！記得是 24 小時制唷！ 🌸</p>
         
         <label for="startDateTime">🕘 上班打卡時間：</label>
         <input type="datetime-local" id="startDateTime" required>
@@ -59,13 +59,13 @@
         <label for="endDateTime">🕕 下班打卡時間：</label>
         <input type="datetime-local" id="endDateTime" disabled>
         
-        <button onclick="calculateWorkHours()">💖 計算工時 💖</button>
+        <button id="calculateButton">💖 計算工時 💖</button>
         
         <h3 id="result"></h3>
     </div>
 
     <script>
-        function calculateWorkHours() {
+        document.getElementById("calculateButton").addEventListener("click", function() {
             let startInput = document.getElementById("startDateTime");
             let endDateTimeInput = document.getElementById("endDateTime");
             let resultText = document.getElementById("result");
@@ -82,7 +82,7 @@
             endDateTimeInput.value = endTime.toISOString().slice(0, 16);
             
             resultText.innerText = `💖 你的下班時間是: ${endTimeFormatted} 💖\n💖 你今天的總工時是: 7 小時 💖`;
-        }
+        });
     </script>
 </body>
 </html>
