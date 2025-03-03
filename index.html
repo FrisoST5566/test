@@ -31,6 +31,9 @@
             border: 2px solid #ff69b4;
             border-radius: 10px;
         }
+        input[type="datetime-local"]::-webkit-datetime-edit-ampm-field {
+            display: none;
+        }
         button {
             background-color: #ff69b4;
             color: white;
@@ -44,8 +47,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>✨ 可愛少女風打卡計算器 ✨</h2>
-        <p>🌸 小仙女們，來輸入你的打卡時間吧！記得是 24 小時制唷！ 🌸</p>
+        <h2>✨ 小少女的打卡計算器 ✨</h2>
+        <p>🌸 小仙女，來輸入你的打卡時間吧！記得是 24 小時制唷！ 🌸</p>
         
         <label for="startDateTime">🕘 上班打卡時間：</label>
         <input type="datetime-local" id="startDateTime" required>
