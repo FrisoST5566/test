@@ -31,17 +31,18 @@
             border: 2px solid #ff69b4;
             border-radius: 10px;
         }
-        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-        }
-        input[type="datetime-local"]::-webkit-datetime-edit-ampm-field {
-            display: none;
+        input[type="datetime-local"] {
+            background-color: white;
+            color: #ff69b4;
+            font-size: 16px;
+            text-align: center;
         }
         button {
             background-color: #ff69b4;
             color: white;
             font-size: 18px;
             cursor: pointer;
+            border: none;
         }
         button:hover {
             background-color: #ff1493;
@@ -50,14 +51,14 @@
 </head>
 <body>
     <div class="container">
-        <h2>✨ 小少女風打卡計算器 ✨</h2>
-        <p>🌸 小仙女，來輸入你的打卡時間吧！記得是 24 小時制唷！ 🌸</p>
+        <h2>✨ 可愛少女風打卡計算器 ✨</h2>
+        <p>🌸 小仙女們，來輸入你的打卡時間吧！記得是 24 小時制唷！ 🌸</p>
         
         <label for="startDateTime">🕘 上班打卡時間：</label>
         <input type="datetime-local" id="startDateTime" required>
         
         <label for="endDateTime">🕕 下班打卡時間：</label>
-        <input type="datetime-local" id="endDateTime" disabled>
+        <input type="text" id="endDateTime" disabled>
         
         <button id="calculateButton">💖 計算工時 💖</button>
         
@@ -78,10 +79,10 @@
             let startTime = new Date(startInput.value);
             let endTime = new Date(startTime.getTime() + 7 * 60 * 60 * 1000); // 加 7 小時
             
-            let endTimeFormatted = endTime.toISOString().slice(0, 16).replace('T', ' ');
-            endDateTimeInput.value = endTime.toISOString().slice(0, 16);
+            let formattedDate = `${endTime.getFullYear()}-${(endTime.getMonth() + 1).toString().padStart(2, '0')}-${endTime.getDate().toString().padStart(2, '0')} ${endTime.getHours().toString().padStart(2, '0')}:${endTime.getMinutes().toString().padStart(2, '0')}`;
+            endDateTimeInput.value = formattedDate;
             
-            resultText.innerText = `💖 你的下班時間是: ${endTimeFormatted} 💖\n💖 你今天的總工時是: 7 小時 💖`;
+            resultText.innerHTML = `💖 你的下班時間是: <strong>${formattedDate}</strong> 💖<br>💖 你今天的總工時是: <strong>7 小時</strong> 💖`;
         });
     </script>
 </body>
