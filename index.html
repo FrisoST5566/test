@@ -50,6 +50,9 @@
         input[type="datetime-local"]::-webkit-datetime-edit-minute-field {
             text-align: center;
         }
+        input[type="datetime-local"] {
+            max-width: 100%;
+        }
         button {
             background-color: #ff69b4;
             color: white;
@@ -68,7 +71,7 @@
         <p>🌸 小仙女們，來輸入你的打卡時間吧！記得是 24 小時制唷！ 🌸</p>
         
         <label for="startDateTime">🕘 上班打卡時間：</label>
-        <input type="datetime-local" id="startDateTime" step="60" required>
+        <input type="datetime-local" id="startDateTime" step="1" required>
         
         <label for="endDateTime">🕕 下班打卡時間：</label>
         <input type="text" id="endDateTime" disabled>
