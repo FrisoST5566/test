@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打卡計算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>打卡計算器</h2>
+        <label for="startTime">上班打卡時間（24小時制，如 22:57）</label>
+        <input type="time" id="startTime" required>
+        
+        <label for="endTime">下班打卡時間（24小時制，如 05:57）</label>
+        <input type="time" id="endTime" required>
+        
+        <button onclick="calculateWorkHours()">計算工時</button>
+        
+        <h3 id="result"></h3>
+    </div>
+
+    <script>
+        function calculateWorkHours() {
+            let start = document.getElementById("startTime").value;
+            let end = document.getElementById("endTime").value;
+            
+            if (!start || !end) {
+                document.getElementById("result").innerText = "請輸入完整的打卡時間！";
+                return;
+            }
+            
+            let startTime = new Date("2025-01-01T" + start);
+            let endTime = new Date("2025-01-01T" + end);
+            
+            if (endTime < startTime) {
+                // 如果下班時間比上班時間早，表示跨日，補一天時間
+                endTime.setDate(endTime.getDate() + 1);
+            }
+            
+            let workHours = (endTime - startTime) / (1000 * 60 * 60); // 轉換成小時
+            document.getElementById("result").innerText = "總工時: " + workHours.toFixed(2) + " 小時";
+        }
+    </script>
+</body>
+</html>
