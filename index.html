@@ -42,6 +42,9 @@
             position: relative;
             z-index: 1;
         }
+        input[type="datetime-local"]::-webkit-datetime-edit-ampm-field {
+            display: none;
+        }
         input[type="datetime-local"]::-webkit-calendar-picker-indicator {
             display: none;
         }
@@ -63,7 +66,7 @@
         <p>🌸 小仙女們，來輸入你的打卡時間吧！記得是 24 小時制唷！ 🌸</p>
         
         <label for="startDateTime">🕘 上班打卡時間：</label>
-        <input type="datetime-local" id="startDateTime" required>
+        <input type="datetime-local" id="startDateTime" step="60" required>
         
         <label for="endDateTime">🕕 下班打卡時間：</label>
         <input type="text" id="endDateTime" disabled>
