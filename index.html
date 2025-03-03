@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小少女的打卡計算器</title>
+    <title>可愛少女風打卡計算器</title>
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -39,7 +39,7 @@
             width: 50px;
         }
         #endDateTime {
-            width: 60%; /* 修正下班打卡時間輸入框的寬度，避免跑版 */
+            width: 80%; /* 修正下班打卡時間輸入框的寬度，避免跑版 */
             margin: auto;
             display: block;
             text-align: center;
@@ -73,8 +73,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>✨ 小少女的打卡計算器 ✨</h2>
-        <p>🌸 小少女，來輸入你的打卡時間吧！🌸</p>
+        <h2>✨ 可愛少女風打卡計算器 ✨</h2>
+        <p>🌸 小仙女們，來輸入你的打卡時間吧！🌸</p>
         
         <label>📅 上班日期：</label>
         <div class="input-group">
@@ -90,6 +90,8 @@
         
         <label>🕕 下班打卡時間：</label>
         <input type="text" id="endDateTime" disabled>
+        
+        <div class="spacer"></div> <!-- 這行是新加入的空行來解決跑版問題 -->
         
         <button id="calculateButton">💖 計算工時 💖</button>
         
