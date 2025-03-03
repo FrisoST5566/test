@@ -13,7 +13,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 400px;
+            max-width: 350px;
             margin: auto;
             background: #fff0f5;
             padding: 20px;
@@ -21,26 +21,40 @@
             box-shadow: 0px 0px 10px rgba(255, 105, 180, 0.5);
         }
         h2 {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
         }
-        input, button {
-            margin: 10px 0;
-            padding: 10px;
-            width: 100%;
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        input {
+            padding: 8px;
             border: 2px solid #ff69b4;
-            border-radius: 10px;
+            border-radius: 5px;
             text-align: center;
+            width: 50px;
         }
         button {
             background-color: #ff69b4;
             color: white;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 10px;
         }
         button:hover {
             background-color: #ff1493;
+        }
+        .result {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -50,19 +64,23 @@
         <p>🌸 小仙女們，來輸入你的打卡時間吧！🌸</p>
         
         <label>📅 上班日期：</label>
-        <input type="text" id="month" placeholder="月" style="width: 30%">/
-        <input type="text" id="day" placeholder="日" style="width: 30%">
+        <div class="input-group">
+            <input type="text" id="month" placeholder="月">/
+            <input type="text" id="day" placeholder="日">
+        </div>
         
         <label>⏰ 上班時間：</label>
-        <input type="text" id="hour" placeholder="時" style="width: 30%">:
-        <input type="text" id="minute" placeholder="分" style="width: 30%">
+        <div class="input-group">
+            <input type="text" id="hour" placeholder="時">:
+            <input type="text" id="minute" placeholder="分">
+        </div>
         
         <label>🕕 下班打卡時間：</label>
         <input type="text" id="endDateTime" disabled>
         
         <button id="calculateButton">💖 計算工時 💖</button>
         
-        <h3 id="result"></h3>
+        <h3 id="result" class="result"></h3>
     </div>
 
     <script>
